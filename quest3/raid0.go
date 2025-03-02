@@ -7,7 +7,7 @@ type RAID0 struct {
 	disks    []*Disk
 }
 
-func NewRAID0(numDisks int) *RAID0 {
+func NewRAID0(numDisks int) RAID {
 	disks := make([]*Disk, numDisks)
 	for i := range disks {
 		disks[i] = NewDisk()
@@ -53,10 +53,14 @@ func (r *RAID0) Read(length int) ([]byte, error) {
 	return ret, nil
 }
 
-func (r *RAID0) ClearDisk(diskIndex int) error {
+func (r *RAID0) FailDisk(diskIndex int) error {
 	if diskIndex < 0 || diskIndex >= len(r.disks) {
 		return errors.New("invalid disk index")
 	}
 	r.disks[diskIndex] = NewDisk()
 	return nil
+}
+
+func (r *RAID0) Reconstruct() error {
+	return errors.New("raid 0 not support reconstruct")
 }

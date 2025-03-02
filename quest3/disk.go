@@ -33,7 +33,7 @@ func (d *Disk) ReadChar(pos int) (byte, error) {
 
 func (d *Disk) Read(length int) ([]byte, error) {
 	if length > len(d.data) {
-		return nil, errors.New("Read error: Length exceeds stored data")
+		return nil, errors.New("read error: length exceeds stored data")
 	}
 	return d.data[:length], nil
 }
