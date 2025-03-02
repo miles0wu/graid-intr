@@ -45,9 +45,7 @@ func NewNode(id int) *Node {
 func (n *Node) AddPeers(peers ...*Node) {
 	n.mu.Lock()
 	defer n.mu.Unlock()
-	for _, peer := range peers {
-		n.peers = append(n.peers, peer)
-	}
+	n.peers = append(n.peers, peers...)
 }
 
 func (n *Node) RemovePeer(peer *Node) {
